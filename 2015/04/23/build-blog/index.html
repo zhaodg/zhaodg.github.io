@@ -73,7 +73,7 @@
     </p>
   <p class="article-time">
     <time datetime="2015-04-23T09:34:36.000Z" itemprop="datePublished">2015-04-23</time>
-    更新日期:<time datetime="2015-04-24T05:52:28.000Z" itemprop="dateModified">2015-04-24</time>
+    更新日期:<time datetime="2015-04-24T06:05:58.000Z" itemprop="dateModified">2015-04-24</time>
     
   </p>
 </header>
@@ -97,13 +97,13 @@
 <li>建立一个 username.github.com 的repo，username为你的github用户名，每个用户只能有一个这样的repo，则直接发布到master分支即可。</li>
 <li>建立一个项目repo，发布的branch是gh-pages.</li>
 </ol>
-<p>我们选择第一种<br><img src="http://7xiqxm.com1.z0.glb.clouddn.com/image/posts/github_pages_0.png" alt=""><br><img src="http://7xiqxm.com1.z0.glb.clouddn.com/image/posts/github_pages_1@2x.png" alt=""><br>未完待续</p>
+<p>我们选择第一种<br><img src="http://7xiqxm.com1.z0.glb.clouddn.com/image/posts/build-blog/github_pages_0.png" alt=""><br><img src="http://7xiqxm.com1.z0.glb.clouddn.com/image/posts/build-blog/github_pages_1@2x.png" alt=""><br>未完待续</p>
 <hr>
 <h1 id="Hexo">Hexo</h1><h2 id="Hexo介绍">Hexo介绍</h2><p>hexo中所有文件的编码格式均是UTF-8。<br>未完待续</p>
 <h2 id="Hexo安装及部署">Hexo安装及部署</h2><p>前提需要安装<code>node.js</code>和<code>git</code>，在这里不做过多描述。</p>
 <p>MAC安装：</p>
 <figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* http://hexo.io/zh-cn/ */</span></span><br><span class="line"></span><br><span class="line">$ mkdir hexo &amp;&amp; cd hexo  <span class="comment"># 在你的工作目录下建立一个文件夹 用于存放hexo相关</span></span><br><span class="line">$ <span class="built_in">npm</span> install hexo-cli -g  <span class="comment"># 安装hexo</span></span><br><span class="line">$ hexo init blog  <span class="comment"># 创建文件夹blog 用于存放静态博客相关</span></span><br><span class="line">$ cd blog</span><br><span class="line">$ <span class="built_in">npm</span> install</span><br><span class="line">$ hexo server  <span class="comment"># 执行hexo server命令，在浏览器中输入http://0.0.0.0:4000/进行查看</span></span><br></pre></td></tr></table></figure>
-<p>效果见下图：<br><img src="http://7xiqxm.com1.z0.glb.clouddn.com/image/posts/hexo_theme_0@2x.png" alt=""></p>
+<p>效果见下图：<br><img src="http://7xiqxm.com1.z0.glb.clouddn.com/image/posts/build-blog/hexo_theme_0@2x.png" alt=""></p>
 <h2 id="Hexo主题">Hexo主题</h2><p>测试中我们使用pacman主题（个人蛮喜欢目录索引这个小玩意儿）</p>
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>git clone <span class="symbol">https:</span>/<span class="regexp">/github.com/</span><span class="constant">A-</span>limon/pacman.git themes/pacman  <span class="comment"># 如需要更新，则执行git pull</span></span><br></pre></td></tr></table></figure>
 <p>修改blog目录下的_config.yml文件</p>
@@ -112,7 +112,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">highlight:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 <p>然后预览我们更换的主题,执行<code>hexo server</code>命令，在浏览器中输入<a href="http://0.0.0.0:4000/" target="_blank" rel="external">http://0.0.0.0:4000/</a>进行查看</p>
 <figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo <span class="keyword">server</span></span><br></pre></td></tr></table></figure>
-<p>效果见下图：<br><img src="http://7xiqxm.com1.z0.glb.clouddn.com/image/posts/hexo_theme_1@2x.png" alt=""></p>
+<p>效果见下图：<br><img src="http://7xiqxm.com1.z0.glb.clouddn.com/image/posts/build-blog/hexo_theme_1@2x.png" alt=""></p>
 <h2 id="Hexo部署到github_pages页面">Hexo部署到github pages页面</h2><p>修改_config.yml文件</p>
 <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">  <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>: <span class="attribute">https</span>:<span class="comment">//github.com/zhaodg/zhaodg.github.io</span></span><br><span class="line">  <span class="attribute">branch</span>: master</span><br></pre></td></tr></table></figure>
 <p>执行命令，安装插件及部署</p>
