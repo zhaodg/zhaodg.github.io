@@ -73,7 +73,7 @@
     </p>
   <p class="article-time">
     <time datetime="2015-04-23T09:34:36.000Z" itemprop="datePublished">2015-04-23</time>
-    更新日期:<time datetime="2015-04-24T07:02:05.000Z" itemprop="dateModified">2015-04-24</time>
+    更新日期:<time datetime="2015-04-24T08:43:21.000Z" itemprop="dateModified">2015-04-24</time>
     
   </p>
 </header>
@@ -92,7 +92,7 @@
 </ol>
 <p>未完待续</p>
 <hr>
-<h1 id="使用github_pages建立博客">使用github pages建立博客</h1><p>github pages建立博客几种方式(<a href="https://help.github.com/articles/user-organization-and-project-pages/" target="_blank" rel="external">GitHub Pages Help Pages</a>)：</p>
+<h1 id="使用github_pages建立博客">使用github pages建立博客</h1><p>github pages建立博客几种<a href="https://help.github.com/articles/user-organization-and-project-pages/" target="_blank" rel="external">方式</a>：</p>
 <ol>
 <li>建立一个 username.github.com 的repo，username为你的github用户名，每个用户只能有一个这样的repo，则直接发布到master分支即可。</li>
 <li>建立一个项目repo，发布的branch是gh-pages.</li>
@@ -125,7 +125,13 @@
 <h2 id="Hexo目录结构">Hexo目录结构</h2><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ tree -La <span class="number">1</span></span><br><span class="line">.</span><br><span class="line">├── .deploy_git  <span class="preprocessor"># 执行hexo d命令部署到github上的内容目录</span></span><br><span class="line">├── .gitignore  <span class="preprocessor"># git的忽略文件配置</span></span><br><span class="line">├── _config.yml  <span class="preprocessor"># hexo配置文件</span></span><br><span class="line">├── db.json  <span class="preprocessor"># 博客内容数据相关</span></span><br><span class="line">├── node_modules  <span class="preprocessor"># hexo的插件存储目录</span></span><br><span class="line">├── <span class="keyword">package</span>.json  <span class="preprocessor"># hexo的版本号及安装插件等信息</span></span><br><span class="line">├── <span class="keyword">public</span>  <span class="preprocessor"># 执行hexo g生成的静态网页内容目录</span></span><br><span class="line">├── scaffolds  <span class="preprocessor"># layout模板文件目录，可自定义模板文件</span></span><br><span class="line">├── source  <span class="preprocessor"># 文章源码目录，该目录下的markdown文件和html文件都会被处理（404、favicon.ico、CNAME等）</span></span><br><span class="line">└── themes  <span class="preprocessor"># 博客主题目录</span></span><br></pre></td></tr></table></figure>
 <h2 id="Hexo配置">Hexo配置</h2><h2 id="Hexo插件">Hexo插件</h2><p><a href="http://hexo.io/plugins/" target="_blank" rel="external">http://hexo.io/plugins/</a></p>
 <hr>
-<h1 id="404页面">404页面</h1><p>准备选腾讯的</p>
+<h1 id="404页面">404页面</h1><p>本人目前选用腾讯公益404页面，具体使用方法：</p>
+<ul>
+<li>在<code>source/</code>页面下新建<code>404.html</code>文件</li>
+<li><code>- 404.html</code>文件具体代码如下</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://www.qq.com/404/search_children.js"</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span> <span class="attribute">homePageUrl</span>=<span class="value">"http://zhaodg.github.io"</span> <span class="attribute">homePageName</span>=<span class="value">"回到我的主页"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>链接：</p>
 <ol>
 <li><a href="http://www.qq.com/404" target="_blank" rel="external">腾讯公益404</a></li>
 <li><a href="http://yibo.iyiyun.com/Index/web404" target="_blank" rel="external">404公益_益云(公益互联网)社会创新中心</a></li>
