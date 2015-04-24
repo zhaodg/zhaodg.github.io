@@ -1,0 +1,411 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>博客搭建 | zhaodg</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="zhaodg">
+    
+    <meta name="description" itemprop="description" content="搭建博客的第一篇博客，分享一下如何建立博客">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="zhaodg" title="zhaodg"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="zhaodg">zhaodg</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/23/build-blog/" title="博客搭建" itemprop="url">博客搭建</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="zhaodg">zhaodg</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2015-04-23T09:34:36.000Z" itemprop="datePublished">2015-04-23</time>
+    更新日期:<time datetime="2015-04-24T05:32:29.000Z" itemprop="dateModified">2015-04-24</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目錄</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#git配置"><span class="toc-number">1.</span> <span class="toc-text">git配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#github账号及使用"><span class="toc-number">2.</span> <span class="toc-text">github账号及使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用github_pages建立博客"><span class="toc-number">3.</span> <span class="toc-text">使用github pages建立博客</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hexo"><span class="toc-number">4.</span> <span class="toc-text">Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo介绍"><span class="toc-number">4.1.</span> <span class="toc-text">Hexo介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo安装及部署"><span class="toc-number">4.2.</span> <span class="toc-text">Hexo安装及部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo主题"><span class="toc-number">4.3.</span> <span class="toc-text">Hexo主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo部署到github_pages页面"><span class="toc-number">4.4.</span> <span class="toc-text">Hexo部署到github pages页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo使用"><span class="toc-number">4.5.</span> <span class="toc-text">Hexo使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#发表一篇新博客"><span class="toc-number">4.5.1.</span> <span class="toc-text">发表一篇新博客</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo命令"><span class="toc-number">4.6.</span> <span class="toc-text">Hexo命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo目录结构"><span class="toc-number">4.7.</span> <span class="toc-text">Hexo目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo配置"><span class="toc-number">4.8.</span> <span class="toc-text">Hexo配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo插件"><span class="toc-number">4.9.</span> <span class="toc-text">Hexo插件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#404页面"><span class="toc-number">5.</span> <span class="toc-text">404页面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#图片"><span class="toc-number">6.</span> <span class="toc-text">图片</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Markdown"><span class="toc-number">7.</span> <span class="toc-text">Markdown</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Markdown语法相关"><span class="toc-number">7.1.</span> <span class="toc-text">Markdown语法相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Markdown编辑器"><span class="toc-number">7.2.</span> <span class="toc-text">Markdown编辑器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-number">8.</span> <span class="toc-text">参考链接</span></a></li></ol>
+		</div>
+		
+		<h1 id="git配置">git配置</h1><p>未完待续</p>
+<h1 id="github账号及使用">github账号及使用</h1><ol>
+<li>建立github账号</li>
+<li><a href="https://help.github.com/articles/generating-ssh-keys/" target="_blank" rel="external">添加ssh keys</a></li>
+</ol>
+<p>未完待续</p>
+<hr>
+<h1 id="使用github_pages建立博客">使用github pages建立博客</h1><p>github pages建立博客几种方式(<a href="https://help.github.com/articles/user-organization-and-project-pages/" target="_blank" rel="external">GitHub Pages Help Pages</a>)：</p>
+<ol>
+<li>建立一个 username.github.com 的repo，username为你的github用户名，每个用户只能有一个这样的repo，则直接发布到master分支即可。</li>
+<li>建立一个项目repo，发布的branch是gh-pages.</li>
+</ol>
+<p>见图片1-3<br>未完待续</p>
+<hr>
+<h1 id="Hexo">Hexo</h1><h2 id="Hexo介绍">Hexo介绍</h2><p>hexo中所有文件的编码格式均是UTF-8。<br>未完待续</p>
+<h2 id="Hexo安装及部署">Hexo安装及部署</h2><p>前提需要安装<code>node.js</code>和<code>git</code>，在这里不做过多描述。</p>
+<p>MAC安装：</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* http://hexo.io/zh-cn/ */</span></span><br><span class="line"></span><br><span class="line">$ mkdir hexo &amp;&amp; cd hexo  <span class="comment"># 在你的工作目录下建立一个文件夹 用于存放hexo相关</span></span><br><span class="line">$ <span class="built_in">npm</span> install hexo-cli -g  <span class="comment"># 安装hexo</span></span><br><span class="line">$ hexo init blog  <span class="comment"># 创建文件夹blog 用于存放静态博客相关</span></span><br><span class="line">$ cd blog</span><br><span class="line">$ <span class="built_in">npm</span> install</span><br><span class="line">$ hexo server  <span class="comment"># 执行hexo server命令，在浏览器中输入http://0.0.0.0:4000/进行查看</span></span><br></pre></td></tr></table></figure>
+<p>效果见截图<br>未完待续</p>
+<h2 id="Hexo主题">Hexo主题</h2><p>测试中我们使用pacman主题（个人蛮喜欢目录索引这个小玩意儿）</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>git clone <span class="symbol">https:</span>/<span class="regexp">/github.com/</span><span class="constant">A-</span>limon/pacman.git themes/pacman  <span class="comment"># 如需要更新，则执行git pull</span></span><br></pre></td></tr></table></figure>
+<p>修改blog目录下的_config.yml文件</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">theme</span>: <span class="string">pacman</span></span><br></pre></td></tr></table></figure>
+<p>为了pacman主题支持代码高亮，修改themes/pacman目录下的_config.yml文件,并添加如下代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">highlight:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>然后预览我们更换的主题,执行<code>hexo server</code>命令，在浏览器中输入<a href="http://0.0.0.0:4000/" target="_blank" rel="external">http://0.0.0.0:4000/</a>进行查看</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo <span class="keyword">server</span></span><br></pre></td></tr></table></figure>
+<h2 id="Hexo部署到github_pages页面">Hexo部署到github pages页面</h2><p>修改_config.yml文件</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deploy</span>:</span><br><span class="line">  <span class="attribute">type</span>: git</span><br><span class="line">  <span class="attribute">repo</span>: <span class="attribute">https</span>:<span class="comment">//github.com/zhaodg/zhaodg.github.io</span></span><br><span class="line">  <span class="attribute">branch</span>: master</span><br></pre></td></tr></table></figure>
+<p>执行命令，安装插件及部署</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>npm install hexo-deployer-git --save  <span class="comment"># 安装hexo-deployer-git插件</span></span><br><span class="line"><span class="variable">$ </span>hexo clean  <span class="comment"># 清理</span></span><br><span class="line"><span class="variable">$ </span>hexo generate  <span class="comment"># 生成静态页面，文件存在public文件目录下</span></span><br><span class="line"><span class="variable">$ </span>hexo deploy  <span class="comment"># 将静态页面部署到zhaodg.github.io上面</span></span><br></pre></td></tr></table></figure>
+<p>部署成功后，<strong>耐心</strong>的等待几分钟，然后在浏览器中输入<a href="http://zhaodg.github.io" target="_blank" rel="external">http://zhaodg.github.io</a>进行查看</p>
+<p>图片待补充</p>
+<h2 id="Hexo使用">Hexo使用</h2><h3 id="发表一篇新博客">发表一篇新博客</h3><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo <span class="keyword">new</span> 这是一篇新博客</span><br></pre></td></tr></table></figure>
+<p>执行命令后，会在source/_posts/这个目录下边生成[这是一篇新博客.md]文件，之后编写md文件，并执行<code>hexo g -d</code>,就会生成页面并部署到github pages上。</p>
+<h2 id="Hexo命令">Hexo命令</h2><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>hexo new <span class="string">"postName"</span>  <span class="comment"># 新建文章</span></span><br><span class="line"><span class="variable">$ </span>hexo new page <span class="string">"pageName"</span>  <span class="comment"># 新建页面，其中page是scaffolds下的模板，这样新建的页面会带一些附属信息</span></span><br><span class="line"><span class="variable">$ </span>hexo generate  <span class="comment"># 生成静态页面，存放至public目录</span></span><br><span class="line"><span class="variable">$ </span>hexo server  <span class="comment">#  开启预览访问端口（默认端口4000，'ctrl + c'关闭server），访问链接http://0.0.0.0:4000</span></span><br><span class="line"><span class="variable">$ </span>hexo deploy  <span class="comment"># 将.deploy目录部署到GitHub</span></span><br><span class="line"><span class="variable">$ </span>hexo clean  <span class="comment"># 清理generate生成的文件和缓存</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 简写</span></span><br><span class="line"><span class="variable">$ </span>hexo n  <span class="comment"># 等价于hexo new</span></span><br><span class="line"><span class="variable">$ </span>hexo g  <span class="comment"># 等价于hexo generate</span></span><br><span class="line"><span class="variable">$ </span>hexo s  <span class="comment"># 等价于hexo server</span></span><br><span class="line"><span class="variable">$ </span>hexo d  <span class="comment"># 等价于hexo deploy</span></span><br><span class="line"><span class="variable">$ </span>hexo g -d  <span class="comment"># 等价于hexo generate + hexo deploy</span></span><br><span class="line"><span class="variable">$ </span>hexo help  <span class="comment"># 查看命令手册</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 任何hexo命令都可以使用前缀，比如"hexo server" == "hexo s" == "hexo se" == "hexo ser"</span></span><br></pre></td></tr></table></figure>
+<h2 id="Hexo目录结构">Hexo目录结构</h2><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ tree -La <span class="number">1</span></span><br><span class="line">.</span><br><span class="line">├── .deploy_git  <span class="preprocessor"># 执行hexo d命令部署到github上的内容目录</span></span><br><span class="line">├── .gitignore  <span class="preprocessor"># git的忽略文件配置</span></span><br><span class="line">├── _config.yml  <span class="preprocessor"># hexo配置文件</span></span><br><span class="line">├── db.json  <span class="preprocessor"># 博客内容数据相关</span></span><br><span class="line">├── node_modules  <span class="preprocessor"># hexo的插件存储目录</span></span><br><span class="line">├── <span class="keyword">package</span>.json  <span class="preprocessor"># hexo的版本号及安装插件等信息</span></span><br><span class="line">├── <span class="keyword">public</span>  <span class="preprocessor"># 执行hexo g生成的静态网页内容目录</span></span><br><span class="line">├── scaffolds  <span class="preprocessor"># layout模板文件目录，可自定义模板文件</span></span><br><span class="line">├── source  <span class="preprocessor"># 文章源码目录，该目录下的markdown文件和html文件都会被处理（404、favicon.ico、CNAME等）</span></span><br><span class="line">└── themes  <span class="preprocessor"># 博客主题目录</span></span><br></pre></td></tr></table></figure>
+<h2 id="Hexo配置">Hexo配置</h2><h2 id="Hexo插件">Hexo插件</h2><p><a href="http://hexo.io/plugins/" target="_blank" rel="external">http://hexo.io/plugins/</a></p>
+<hr>
+<h1 id="404页面">404页面</h1><p>准备选腾讯的</p>
+<ol>
+<li><a href="http://www.qq.com/404" target="_blank" rel="external">腾讯公益404</a></li>
+<li><a href="http://yibo.iyiyun.com/Index/web404" target="_blank" rel="external">404公益_益云(公益互联网)社会创新中心</a></li>
+<li><a href="http://404page.missingkids.org.tw" target="_blank" rel="external">失蹤兒童少年資料管理中心404</a></li>
+</ol>
+<hr>
+<h1 id="图片">图片</h1><p>国内准备选七牛</p>
+<ul>
+<li>10GB永久免费存储空间  </li>
+<li>每月10GB下载流量 </li>
+<li>每月10万次Put请求  </li>
+<li>每月100万次Get请求</li>
+</ul>
+<p>链接：</p>
+<ol>
+<li><a href="http://www.qiniu.com" target="_blank" rel="external">七牛</a></li>
+<li><a href="https://www.dropbox.com" target="_blank" rel="external">dropbox</a></li>
+</ol>
+<p>未完待续。。。</p>
+<hr>
+<h1 id="Markdown">Markdown</h1><h2 id="Markdown语法相关">Markdown语法相关</h2><ol>
+<li><a href="http://www.jianshu.com/p/q81RER" target="_blank" rel="external">http://www.jianshu.com/p/q81RER</a></li>
+<li><a href="http://wowubuntu.com/markdown/" target="_blank" rel="external">http://wowubuntu.com/markdown/</a></li>
+<li><a href="http://markdown.tw" target="_blank" rel="external">http://markdown.tw</a></li>
+</ol>
+<h2 id="Markdown编辑器">Markdown编辑器</h2><p><a href="http://code.csdn.net/news/2819623" target="_blank" rel="external">http://code.csdn.net/news/2819623</a></p>
+<hr>
+<h1 id="参考链接">参考链接</h1><ol>
+<li><a href="http://zespia.tw/blog/2012/10/11/hexo-debut/" target="_blank" rel="external">Hexo的创造者—台湾tommy351</a></li>
+<li><a href="https://help.github.com/articles/user-organization-and-project-pages/" target="_blank" rel="external">GitHub Pages Help Pages</a></li>
+<li><a href="http://blog.ssyog.com/blog/jekyll/github-pages-intro.html" target="_blank" rel="external">GitHub Pages Help Pages翻译</a></li>
+<li><a href="http://hexo.io/docs/" target="_blank" rel="external">http://hexo.io/docs/</a></li>
+<li><a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">http://ibruce.info/2013/11/22/hexo-your-blog/</a></li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/github-pages/">github pages</a><a href="/tags/hexo/">hexo</a><a href="/tags/博客/">博客</a><a href="/tags/技术/">技术</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/博客/">博客</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2015/04/23/build-blog/" data-title="博客搭建 | zhaodg" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/04/23/hello-world/"  title="Hello World">
+ <strong>NEXT:</strong><br/> 
+ <span>Hello World
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#git配置"><span class="toc-number">1.</span> <span class="toc-text">git配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#github账号及使用"><span class="toc-number">2.</span> <span class="toc-text">github账号及使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用github_pages建立博客"><span class="toc-number">3.</span> <span class="toc-text">使用github pages建立博客</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hexo"><span class="toc-number">4.</span> <span class="toc-text">Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo介绍"><span class="toc-number">4.1.</span> <span class="toc-text">Hexo介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo安装及部署"><span class="toc-number">4.2.</span> <span class="toc-text">Hexo安装及部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo主题"><span class="toc-number">4.3.</span> <span class="toc-text">Hexo主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo部署到github_pages页面"><span class="toc-number">4.4.</span> <span class="toc-text">Hexo部署到github pages页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo使用"><span class="toc-number">4.5.</span> <span class="toc-text">Hexo使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#发表一篇新博客"><span class="toc-number">4.5.1.</span> <span class="toc-text">发表一篇新博客</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo命令"><span class="toc-number">4.6.</span> <span class="toc-text">Hexo命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo目录结构"><span class="toc-number">4.7.</span> <span class="toc-text">Hexo目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo配置"><span class="toc-number">4.8.</span> <span class="toc-text">Hexo配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo插件"><span class="toc-number">4.9.</span> <span class="toc-text">Hexo插件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#404页面"><span class="toc-number">5.</span> <span class="toc-text">404页面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#图片"><span class="toc-number">6.</span> <span class="toc-text">图片</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Markdown"><span class="toc-number">7.</span> <span class="toc-text">Markdown</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Markdown语法相关"><span class="toc-number">7.1.</span> <span class="toc-text">Markdown语法相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Markdown编辑器"><span class="toc-number">7.2.</span> <span class="toc-text">Markdown编辑器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-number">8.</span> <span class="toc-text">参考链接</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分類</p>
+		<ul>
+		
+			<li><a href="/categories/博客/" title="博客">博客<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">標簽</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/github-pages/" title="github pages">github pages<sup>1</sup></a></li>
+		
+			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		
+			<li><a href="/tags/博客/" title="博客">博客<sup>1</sup></a></li>
+		
+			<li><a href="/tags/技术/" title="技术">技术<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">標簽雲</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/github-pages/" style="font-size: NaNpx;">github pages</a><a href="/tags/hexo/" style="font-size: NaNpx;">hexo</a><a href="/tags/博客/" style="font-size: NaNpx;">博客</a><a href="/tags/技术/" style="font-size: NaNpx;">技术</a>
+    </div>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情鏈接</p>
+    <ul>
+      <li><a href="http://yangjian.me" target="_blank" title="YangJian">Alimon's Blog</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m zhaodg. <br/>
+			New Life!</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		
+		
+		<a href="https://github.com/https://github.com/zhaodg" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="zhaodg">zhaodg</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
