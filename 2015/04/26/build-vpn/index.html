@@ -1,0 +1,386 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>搭建VPN | zhaodg</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="zhaodg">
+    
+    <meta name="description" itemprop="description" content="VPN是什么就不做过多描述，简介一下本人在Linode上centos7系统如何搭建pptpd服务。">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="zhaodg" title="zhaodg"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="zhaodg">zhaodg</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/26/build-vpn/" title="搭建VPN" itemprop="url">搭建VPN</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="zhaodg">zhaodg</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2015-04-26T04:04:44.000Z" itemprop="datePublished">2015-04-26</time>
+    更新日期:<time datetime="2015-04-26T07:22:23.000Z" itemprop="dateModified">2015-04-26</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目錄</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#更新centos7源"><span class="toc-number">1.</span> <span class="toc-text">更新centos7源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装及配置"><span class="toc-number">2.</span> <span class="toc-text">安装及配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#检测PPP是否开启"><span class="toc-number">2.1.</span> <span class="toc-text">检测PPP是否开启</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装软件及依赖"><span class="toc-number">2.2.</span> <span class="toc-text">安装软件及依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置VPN账号密码"><span class="toc-number">2.3.</span> <span class="toc-text">设置VPN账号密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改/etc/pptpd-conf文件"><span class="toc-number">2.4.</span> <span class="toc-text">修改/etc/pptpd.conf文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改/etc/ppp/options-pptpd文件"><span class="toc-number">2.5.</span> <span class="toc-text">修改/etc/ppp/options.pptpd文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改/etc/sysctl-conf文件"><span class="toc-number">2.6.</span> <span class="toc-text">修改/etc/sysctl.conf文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加iptables转发规则"><span class="toc-number">2.7.</span> <span class="toc-text">添加iptables转发规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开机自动启动"><span class="toc-number">2.8.</span> <span class="toc-text">开机自动启动</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MAC使用自建VPN"><span class="toc-number">3.</span> <span class="toc-text">MAC使用自建VPN</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#脚本部署"><span class="toc-number">4.</span> <span class="toc-text">脚本部署</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li></ol>
+		</div>
+		
+		<h1 id="更新centos7源">更新centos7源</h1><figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/yum.repos.d/epel.repo</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加如下内容</span></span><br><span class="line">[epel]</span><br><span class="line"><span class="literal">name</span>=<span class="constant">Extra</span> <span class="constant">Packages</span> for <span class="constant">Enterprise</span> <span class="constant">Linux</span> <span class="number">7</span> - $basearch</span><br><span class="line"><span class="comment">#baseurl=http://download.fedoraproject.org/pub/epel/7/$basearch</span></span><br><span class="line"><span class="literal">mirrorlist</span>=https://mirrors.fedoraproject.org/<span class="literal">metalink</span>?repo=epel-<span class="number">7</span>&amp;arch=$basearch</span><br><span class="line"><span class="literal">failovermethod</span>=<span class="literal">priority</span></span><br><span class="line"><span class="literal">enabled</span>=<span class="number">1</span></span><br><span class="line"><span class="literal">gpgcheck</span>=<span class="number">0</span></span><br><span class="line"><span class="literal">gpgkey</span>=<span class="keyword">file</span>:///etc/pki/rpm-gpg/<span class="constant">R</span>PM-<span class="constant">G</span>PG-<span class="constant">K</span>EY-<span class="constant">E</span>PEL-<span class="number">7</span></span><br><span class="line"></span><br><span class="line">[epel-debuginfo]</span><br><span class="line"><span class="literal">name</span>=<span class="constant">Extra</span> <span class="constant">Packages</span> for <span class="constant">Enterprise</span> <span class="constant">Linux</span> <span class="number">7</span> - $basearch - <span class="constant">Debug</span></span><br><span class="line"><span class="comment">#baseurl=http://download.fedoraproject.org/pub/epel/7/$basearch/debug</span></span><br><span class="line"><span class="literal">mirrorlist</span>=https://mirrors.fedoraproject.org/<span class="literal">metalink</span>?repo=epel-debug-<span class="number">7</span>&amp;arch=$basearch</span><br><span class="line"><span class="literal">failovermethod</span>=<span class="literal">priority</span></span><br><span class="line"><span class="literal">enabled</span>=<span class="number">0</span></span><br><span class="line"><span class="literal">gpgkey</span>=<span class="keyword">file</span>:///etc/pki/rpm-gpg/<span class="constant">R</span>PM-<span class="constant">G</span>PG-<span class="constant">K</span>EY-<span class="constant">E</span>PEL-<span class="number">7</span></span><br><span class="line"><span class="literal">gpgcheck</span>=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">[epel-<span class="literal">source</span>]</span><br><span class="line"><span class="literal">name</span>=<span class="constant">Extra</span> <span class="constant">Packages</span> for <span class="constant">Enterprise</span> <span class="constant">Linux</span> <span class="number">7</span> - $basearch - <span class="constant">Source</span></span><br><span class="line"><span class="comment">#baseurl=http://download.fedoraproject.org/pub/epel/7/SRPMS</span></span><br><span class="line"><span class="literal">mirrorlist</span>=https://mirrors.fedoraproject.org/<span class="literal">metalink</span>?repo=epel-<span class="literal">source</span>-<span class="number">7</span>&amp;arch=$basearch</span><br><span class="line"><span class="literal">failovermethod</span>=<span class="literal">priority</span></span><br><span class="line"><span class="literal">enabled</span>=<span class="number">0</span></span><br><span class="line"><span class="literal">gpgkey</span>=<span class="keyword">file</span>:///etc/pki/rpm-gpg/<span class="constant">R</span>PM-<span class="constant">G</span>PG-<span class="constant">K</span>EY-<span class="constant">E</span>PEL-<span class="number">7</span></span><br><span class="line"><span class="literal">gpgcheck</span>=<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#保存退出并执行如下命令</span></span><br><span class="line">$ yum makecache</span><br></pre></td></tr></table></figure>
+<h1 id="安装及配置">安装及配置</h1><h2 id="检测PPP是否开启">检测PPP是否开启</h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#开启成功的标识</span><br><span class="line"><span class="string">cat:</span> <span class="regexp">/dev/</span><span class="string">ppp:</span> 没有那个设备或地址</span><br><span class="line"># or <span class="string">cat:</span> <span class="regexp">/dev/</span><span class="string">ppp:</span> No such file or directory</span><br><span class="line"># or <span class="string">cat:</span> <span class="regexp">/dev/</span><span class="string">ppp:</span> No such device or address</span><br></pre></td></tr></table></figure>
+<h2 id="安装软件及依赖">安装软件及依赖</h2><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">$</span> <span class="comment">yum</span> <span class="comment">install</span> <span class="comment">make</span> <span class="comment">openssl</span> <span class="comment">gcc</span><span class="literal">-</span><span class="comment">c</span><span class="literal">+</span><span class="literal">+</span> <span class="comment">ppp</span> <span class="comment">iptables</span> <span class="comment">pptpd</span> <span class="comment">iptables</span><span class="literal">-</span><span class="comment">services</span></span><br></pre></td></tr></table></figure>
+<h2 id="设置VPN账号密码">设置VPN账号密码</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ echo <span class="string">"账号 pptpd 密码 *"</span> &gt;&gt; /etc/ppp/chap-secrets</span><br><span class="line"><span class="preprocessor"># /etc/ppp/chap-secrets 账号密码格式说明</span></span><br><span class="line"><span class="preprocessor"># Secrets for authentication using CHAP</span></span><br><span class="line"><span class="preprocessor"># client server secret IP addresses </span></span><br><span class="line"><span class="preprocessor"># 注意：上面的用户名和密码都区分大小写</span></span><br></pre></td></tr></table></figure>
+<h2 id="修改/etc/pptpd-conf文件">修改/etc/pptpd.conf文件</h2><p>搜索<code>localip</code>，去掉下面字段前面的#，然后保存退出</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">localip</span> <span class="number">192.168.0.1</span></span><br><span class="line">remoteip <span class="number">192.168.0.234</span>-<span class="number">238</span>,<span class="number">192.168.0.245</span></span><br></pre></td></tr></table></figure>
+<h2 id="修改/etc/ppp/options-pptpd文件">修改/etc/ppp/options.pptpd文件</h2><p>搜索<code>ms-dns</code>，去掉搜索到的两行<code>ms-dns</code>前面的#，并修改为下面的字段</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ms-dns 8.8.8.8</span><br><span class="line">ms-dns 8.8.4.4</span><br></pre></td></tr></table></figure>
+<h2 id="修改/etc/sysctl-conf文件">修改/etc/sysctl.conf文件</h2><p>在conf末尾添加下面的代码，使内核支持转发</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="class">.ipv4</span><span class="class">.ip_forward</span>=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>运行如下命令，是内核转发修改生效</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sysctl -p</span><br></pre></td></tr></table></figure>
+<h2 id="添加iptables转发规则">添加iptables转发规则</h2><p>1.适用于OpenVZ架构</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING <span class="operator">-s</span> <span class="number">172.16</span>.<span class="number">36.0</span>/<span class="number">24</span> -j SNAT --to-source `ifconfig | grep <span class="string">'inet'</span> | grep <span class="string">'netmask'</span> | grep <span class="string">'broadcast'</span> | grep -v <span class="string">'127.0.0.1'</span> | cut <span class="operator">-d</span>: <span class="operator">-f</span>2 | awk <span class="string">'NR==1 &#123;print $2&#125;'</span></span><br></pre></td></tr></table></figure>
+<p>2.适用于XEN架构（Linode采用）</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">iptables</span> -t nat -A POSTROUTING -s <span class="number">192.168.0.0</span>/<span class="number">24</span> -o eth0 -j MASQUERADE</span><br></pre></td></tr></table></figure>
+<p>配置iptables转发规则：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>iptables -<span class="constant">A</span> <span class="constant">FORWARD</span> -p tcp --syn -s <span class="number">192.168</span>.<span class="number">0</span>.<span class="number">0</span>/<span class="number">24</span> -j <span class="constant">TCPMSS</span> --set-mss <span class="number">1356</span></span><br><span class="line"><span class="variable">$ </span>iptables -t nat -<span class="constant">A</span> <span class="constant">POSTROUTING</span> -s <span class="number">192.168</span>.<span class="number">0</span>.<span class="number">0</span>/<span class="number">24</span> -o eth<span class="number">0</span> -j <span class="constant">MASQUERADE</span></span><br><span class="line"><span class="variable">$ </span>/usr/libexec/iptables/iptables.init save</span><br><span class="line"></span><br><span class="line"><span class="variable">$ </span>mknod /dev/ppp c <span class="number">108</span> <span class="number">0</span></span><br><span class="line"><span class="variable">$ </span>chmod +x /etc/rc.d/rc.local</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把相关转发规则添加到/etc/rc.local这个文件</span></span><br><span class="line"><span class="variable">$ </span>echo <span class="string">"1"</span> &gt; <span class="regexp">/proc/sys</span><span class="regexp">/net/ipv</span>4/ip_forward</span><br><span class="line"><span class="variable">$ </span>echo <span class="string">"mknod /dev/ppp c 108 0"</span> <span class="prompt">&gt;&gt; </span>/etc/rc.local</span><br><span class="line"><span class="variable">$ </span>echo <span class="string">"echo \"1\"&gt;/proc/sys/net/ipv4/ip_forward"</span> <span class="prompt">&gt;&gt; </span>/etc/rc.local</span><br><span class="line"></span><br><span class="line"><span class="variable">$ </span>echo <span class="string">"iptables -A INPUT -p tcp  --dport 1723 -j ACCEPT"</span> <span class="prompt">&gt;&gt; </span>/etc/rc.local</span><br><span class="line"><span class="variable">$ </span> echo <span class="string">"iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT"</span> <span class="prompt">&gt;&gt; </span>/etc/rc.local</span><br><span class="line"><span class="variable">$ </span>echo <span class="string">"iptables -A INPUT -p gre -j ACCEPT"</span> <span class="prompt">&gt;&gt; </span>/etc/rc.local</span><br><span class="line"><span class="variable">$ </span>echo <span class="string">"iptables -A OUTPUT  -p gre -j ACCEPT"</span> <span class="prompt">&gt;&gt; </span>/etc/rc.local</span><br><span class="line"></span><br><span class="line"><span class="variable">$ </span>echo <span class="string">"iptables -A FORWARD -p tcp --syn -s 192.168.0.0/24 -j TCPMSS --set-mss 1356"</span> <span class="prompt">&gt;&gt; </span>/etc/rc.local</span><br><span class="line"><span class="variable">$ </span>echo <span class="string">"iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -o eth0 -j MASQUERADE"</span> <span class="prompt">&gt;&gt; </span>/etc/rc.local</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启iptables和pptpd服务</span></span><br><span class="line"><span class="variable">$ </span>systemctl restart iptables</span><br><span class="line"><span class="variable">$ </span>systemctl restart pptpd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 注意：再重启iptables服务后一定要再执行一遍nat转发规则</span></span><br><span class="line"><span class="variable">$ </span>iptables -t nat -<span class="constant">A</span> <span class="constant">POSTROUTING</span> -s <span class="number">192.168</span>.<span class="number">0</span>.<span class="number">0</span>/<span class="number">24</span> -o eth<span class="number">0</span> -j <span class="constant">MASQUERADE</span></span><br></pre></td></tr></table></figure>
+<h2 id="开机自动启动">开机自动启动</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chkconfig pptpd <span class="function_start"><span class="keyword">on</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="MAC使用自建VPN">MAC使用自建VPN</h1><ol>
+<li>配置服务器、账号、密码等 </li>
+<li>点击 VPN(PPTP) -&gt; Advanced-&gt; Options-&gt; 把Send all traffic over VPN connection 选择上</li>
+</ol>
+<h1 id="脚本部署">脚本部署</h1><p>链接：<a href="https://github.com/zhaodg/pptpd-centos7-install-script" target="_blank" rel="external">https://github.com/zhaodg/pptpd-centos7-install-script</a></p>
+<p>使用方法：</p>
+<p>1.Update centos7 yum</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">sh</span> install-centos7-yum-pero.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
+<p>2.Install pptpd and run it</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">sh</span> install-pptpd.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
+<h1 id="参考链接">参考链接</h1><ol>
+<li><a href="http://www.wanghailin.cn/centos-7-vpn/" target="_blank" rel="external">http://www.wanghailin.cn/centos-7-vpn/</a></li>
+<li><a href="http://www.wanghailin.cn/scka/centos7-yum-pero/" target="_blank" rel="external">http://www.wanghailin.cn/scka/centos7-yum-pero/</a></li>
+<li><a href="http://blog.xuzeshui.com/archives/121.html" target="_blank" rel="external">http://blog.xuzeshui.com/archives/121.html</a></li>
+<li><a href="http://www.longlan.net/2013/06/04/736/" target="_blank" rel="external">http://www.longlan.net/2013/06/04/736/</a></li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Centos/">Centos</a><a href="/tags/Linode/">Linode</a><a href="/tags/Linux/">Linux</a><a href="/tags/VPN/">VPN</a><a href="/tags/pptpd/">pptpd</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Linux/">Linux</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2015/04/26/build-vpn/" data-title="搭建VPN | zhaodg" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/04/23/build-blog/"  title="博客搭建">
+ <strong>NEXT:</strong><br/> 
+ <span>博客搭建
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#更新centos7源"><span class="toc-number">1.</span> <span class="toc-text">更新centos7源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装及配置"><span class="toc-number">2.</span> <span class="toc-text">安装及配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#检测PPP是否开启"><span class="toc-number">2.1.</span> <span class="toc-text">检测PPP是否开启</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装软件及依赖"><span class="toc-number">2.2.</span> <span class="toc-text">安装软件及依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置VPN账号密码"><span class="toc-number">2.3.</span> <span class="toc-text">设置VPN账号密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改/etc/pptpd-conf文件"><span class="toc-number">2.4.</span> <span class="toc-text">修改/etc/pptpd.conf文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改/etc/ppp/options-pptpd文件"><span class="toc-number">2.5.</span> <span class="toc-text">修改/etc/ppp/options.pptpd文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改/etc/sysctl-conf文件"><span class="toc-number">2.6.</span> <span class="toc-text">修改/etc/sysctl.conf文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加iptables转发规则"><span class="toc-number">2.7.</span> <span class="toc-text">添加iptables转发规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开机自动启动"><span class="toc-number">2.8.</span> <span class="toc-text">开机自动启动</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MAC使用自建VPN"><span class="toc-number">3.</span> <span class="toc-text">MAC使用自建VPN</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#脚本部署"><span class="toc-number">4.</span> <span class="toc-text">脚本部署</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分類</p>
+		<ul>
+		
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+		
+			<li><a href="/categories/博客/" title="博客">博客<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">標簽</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/Centos/" title="Centos">Centos<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Linode/" title="Linode">Linode<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Linux/" title="Linux">Linux<sup>1</sup></a></li>
+		
+			<li><a href="/tags/VPN/" title="VPN">VPN<sup>1</sup></a></li>
+		
+			<li><a href="/tags/github-pages/" title="github pages">github pages<sup>1</sup></a></li>
+		
+			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		
+			<li><a href="/tags/pptpd/" title="pptpd">pptpd<sup>1</sup></a></li>
+		
+			<li><a href="/tags/博客/" title="博客">博客<sup>1</sup></a></li>
+		
+			<li><a href="/tags/技术/" title="技术">技术<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">標簽雲</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/Centos/" style="font-size: NaNpx;">Centos</a><a href="/tags/Linode/" style="font-size: NaNpx;">Linode</a><a href="/tags/Linux/" style="font-size: NaNpx;">Linux</a><a href="/tags/VPN/" style="font-size: NaNpx;">VPN</a><a href="/tags/github-pages/" style="font-size: NaNpx;">github pages</a><a href="/tags/hexo/" style="font-size: NaNpx;">hexo</a><a href="/tags/pptpd/" style="font-size: NaNpx;">pptpd</a><a href="/tags/博客/" style="font-size: NaNpx;">博客</a><a href="/tags/技术/" style="font-size: NaNpx;">技术</a>
+    </div>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情鏈接</p>
+    <ul>
+      <li><a href="http://yangjian.me" target="_blank" title="YangJian">Alimon's Blog</a></li>
+      <li><a href="http://hexo.io" target="_blank" title="Hexo">Hexo</a></li>
+    </ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m zhaodg. <br/>
+			New Life!</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		
+		
+		<a href="https://github.com/https://github.com/zhaodg" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="zhaodg">zhaodg</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
