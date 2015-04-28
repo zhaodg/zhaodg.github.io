@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hello World | zhaodg</title>
+    <title>How To Install Git on CentOS 7 | zhaodg</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="zhaodg">
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in ">
+    <meta name="description" itemprop="description" content="How To Install Git on CentOS 7">
     
     
     
@@ -67,15 +67,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/23/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2015/04/27/How-To-Install-Git-on-CentOS-7/" title="How To Install Git on CentOS 7" itemprop="url">How To Install Git on CentOS 7</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="zhaodg">zhaodg</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-04-23T09:09:10.000Z" itemprop="datePublished">2015-04-23</time>
-    更新日期:<time datetime="2015-04-23T09:09:10.000Z" itemprop="dateModified">2015-04-23</time>
+    <time datetime="2015-04-27T11:15:04.000Z" itemprop="datePublished">2015-04-27</time>
+    更新日期:<time datetime="2015-04-28T04:10:43.000Z" itemprop="dateModified">2015-04-28</time>
     
   </p>
 </header>
@@ -84,28 +84,35 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Install_Git_with_Yum"><span class="toc-number">1.</span> <span class="toc-text">Install Git with Yum</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Install_Git_from_Source"><span class="toc-number">2.</span> <span class="toc-text">Install Git from Source</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Set_Up_Git"><span class="toc-number">3.</span> <span class="toc-text">Set Up Git</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-number">4.</span> <span class="toc-text">参考链接</span></a></li></ol>
 		</div>
 		
-		<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+		<h1 id="Install_Git_with_Yum">Install Git with Yum</h1><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo yum install git  <span class="comment"># 需要root权限</span></span><br><span class="line"><span class="variable">$ </span>git --version</span><br></pre></td></tr></table></figure>
+<h1 id="Install_Git_from_Source">Install Git from Source</h1><p>参考下边的教程<br><a href="https://www.digitalocean.com/community/tutorials/how-to-install-git-on-centos-7" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/how-to-install-git-on-centos-7</a></p>
+<h1 id="Set_Up_Git">Set Up Git</h1><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user<span class="class">.name</span> <span class="string">"Your Name"</span></span><br><span class="line">$ git config --global user<span class="class">.email</span> <span class="string">"you@example.com"</span></span><br><span class="line">$ git config --list</span><br></pre></td></tr></table></figure>
+<h1 id="参考链接">参考链接</h1><ol>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-git-on-centos-7" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/how-to-install-git-on-centos-7</a></li>
+</ol>
   
 	</div>
 		<footer class="article-footer clearfix">
 
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/centos/">centos</a><a href="/tags/git/">git</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/git/">git</a>►<a class="article-category-link" href="/categories/git/linux/">linux</a>►<a class="article-category-link" href="/categories/git/linux/centos/">centos</a>
+</div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2015/04/23/hello-world/" data-title="Hello World | zhaodg" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2015/04/27/How-To-Install-Git-on-CentOS-7/" data-title="How To Install Git on CentOS 7 | zhaodg" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -114,14 +121,14 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/04/23/build-blog/" title="博客搭建">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  博客搭建</span>
+
+<div class="next">
+<a href="/2015/04/26/build-vpn/"  title="搭建VPN">
+ <strong>NEXT:</strong><br/> 
+ <span>搭建VPN
+</span>
 </a>
 </div>
-
 
 </nav>
 
@@ -131,7 +138,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Install_Git_with_Yum"><span class="toc-number">1.</span> <span class="toc-text">Install Git with Yum</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Install_Git_from_Source"><span class="toc-number">2.</span> <span class="toc-text">Install Git from Source</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Set_Up_Git"><span class="toc-number">3.</span> <span class="toc-text">Set Up Git</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-number">4.</span> <span class="toc-text">参考链接</span></a></li></ol>
   </div>
 
 <div id="asidepart">
